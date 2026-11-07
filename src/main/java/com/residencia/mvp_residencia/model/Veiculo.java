@@ -19,7 +19,7 @@ public class Veiculo {
     @Column(name = "id_veiculo")
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column()
     private String placa;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

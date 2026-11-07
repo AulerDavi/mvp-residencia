@@ -1,7 +1,8 @@
 package com.residencia.mvp_residencia.model;
 
 public enum TipoDia {
-    DIA_UTIL,
+    DIAUTIL,
     SABADO,
-    DOMINGO_FERIADO
+    DOMINGO,
+    FERIADO
 }
