@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +21,11 @@ public class LinhaService {
 
     private final LinhaRepository linhaRepository;
 
-    public List<LinhaResponse> listar(Pageable pageable) {
-        return linhaRepository.findAll(pageable).map(LinhaResponse::de).getContent();
+    public List<LinhaResponse> listar(String tipo, Pageable pageable) {
+        Page<Linha> pagina = (tipo == null || tipo.isBlank())
+                ? linhaRepository.findAll(pageable)
+                : linhaRepository.findByTipoIgnoreCase(tipo.trim(), pageable);
+        return pagina.map(LinhaResponse::de).getContent();
     }
 
     public LinhaResponse buscarPorId(Long id) {

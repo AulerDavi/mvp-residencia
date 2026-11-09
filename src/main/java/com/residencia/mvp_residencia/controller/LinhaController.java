@@ -22,8 +22,10 @@ public class LinhaController {
     private final LinhaService service;
 
     @GetMapping
-    public List<LinhaResponse> listar(@PageableDefault(size = 20, sort = "id") Pageable pageable) {
-        return service.listar(pageable);
+    public List<LinhaResponse> listar(
+            @RequestParam(required = false) String tipo,
+            @PageableDefault (size = 20, sort = "id") Pageable pageable) {
+        return service.listar(tipo, pageable);
     }
 
     @GetMapping("/{id}")
