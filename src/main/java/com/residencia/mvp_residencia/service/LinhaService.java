@@ -13,6 +13,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
+import com.residencia.mvp_residencia.dto.ServicoVeiculoResponse;
+import com.residencia.mvp_residencia.model.Veiculos;
+import com.residencia.mvp_residencia.simulador.SimuladorVeiculoService;
+import java.time.LocalDateTime;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -69,4 +76,19 @@ public class LinhaService {
         linha.setSentido(request.sentido());
         linha.setAtiva(request.ativa() == null || request.ativa());
     }
+private final SimuladorVeiculoService simuladorService;
+public ServicoVeiculoResponse buscarStatus(Long id) {
+    Veiculos veiculo = simuladorService.buscarPorId(String.valueOf(id))
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Status em tempo real não encontrado para a linha " + id
+            ));
+
+    return new ServicoVeiculoResponse(
+        id,
+        veiculo.getNome(),
+        veiculo.getStatus(),
+        veiculo.getStatus().getDescricao(),
+        LocalDateTime.now()
+    );
+}
 }

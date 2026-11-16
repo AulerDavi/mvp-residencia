@@ -2,6 +2,7 @@ package com.residencia.mvp_residencia.controller;
 
 import com.residencia.mvp_residencia.dto.LinhaRequest;
 import com.residencia.mvp_residencia.dto.LinhaResponse;
+import com.residencia.mvp_residencia.dto.ServicoVeiculoResponse;
 import com.residencia.mvp_residencia.service.LinhaService;
 import jakarta.validation.Valid;
 import java.net.URI;
@@ -24,7 +25,7 @@ public class LinhaController {
     @GetMapping
     public List<LinhaResponse> listar(
             @RequestParam(required = false) String tipo,
-            @PageableDefault (size = 20, sort = "id") Pageable pageable) {
+            @PageableDefault(size = 20, sort = "id") Pageable pageable) {
         return service.listar(tipo, pageable);
     }
 
@@ -50,5 +51,10 @@ public class LinhaController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long id) {
         service.deletar(id);
+    }
+
+    @GetMapping("/{id}/status")
+    public ServicoVeiculoResponse buscarStatus(@PathVariable Long id) {
+        return service.buscarStatus(id);
     }
 }
