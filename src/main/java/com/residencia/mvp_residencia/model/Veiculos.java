@@ -1,11 +1,11 @@
 package com.residencia.mvp_residencia.model;
 
-public class Veiculo {
+public class Veiculos {
     private String id;
     private String nome;
     private StatusVeiculo status;
 
-    public Veiculo(String id, String nome, StatusVeiculo status) {
+    public Veiculos(String id, String nome, StatusVeiculo status) {
         this.id = id;
         this.nome = nome;
         this.status = status;
