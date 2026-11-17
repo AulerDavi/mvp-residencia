@@ -22,6 +22,6 @@ public record RotaFavoritaResponse(
     }
 }
 
-'RotaFavoritaRequest recebe apenas os IDs da linha e da parada (o ID do usuário vem direto do token JWT).'
+// RotaFavoritaRequest recebe apenas os IDs da linha e da parada (o ID do usuário vem direto do token JWT).
 
-'RotaFavoritaResponse devolve os dados prontos para exibir na tela (incluindo o id do favorito, útil na hora de excluir) e já traz o método fromEntity para converter a entidade do banco sem repetir código no serviço.'
+// RotaFavoritaResponse devolve os dados prontos para exibir na tela (incluindo o id do favorito, útil na hora de excluir) e já traz o método fromEntity para converter a entidade do banco sem repetir código no serviço.
