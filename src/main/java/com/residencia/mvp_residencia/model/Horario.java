@@ -28,7 +28,7 @@ public class Horario {
     private TipoDia tipoDia;
 
     @Column(name = "adaptado_deficiente", nullable = false)
-    private boolean adaptadoDeficiente;
+    private boolean adaptadoDeficiente; 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_linha", nullable = false)
@@ -38,3 +38,4 @@ public class Horario {
     @JoinColumn(name = "id_parada", nullable = false)
     private Parada parada;
 }
+

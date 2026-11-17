@@ -16,3 +16,8 @@ public interface HorarioRepository extends JpaRepository<Horario, Long> {
 
     List<Horario> findByLinhaIdAndAdaptadoDeficienteTrue(Long linhaId);
 }
+
+//findByLinhaId — filtra apenas os horários da linha informada
+//AndParadaId — restringe aos horários daquela parada específica
+//AndTipoDia — separa apenas os horários válidos para o tipo de dia passado (ex: dia útil, sábado ou domingo).
+//OrderByHoraPartida — devolve a List<Horario> já ordenada cronologicamente, do mais cedo para o mais tarde (ex: 06:15, 06:45, 07:10)
