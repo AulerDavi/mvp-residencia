@@ -35,11 +35,11 @@
 			<artifactId>spring-boot-h2console</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.boot</groupId> O primeiro liga o Spring Security. Ele bloqueia todas as rotas pedindo login, que é a proteção que você quer.
+		    <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>  O segundo traz as ferramentas para criar e conferir o token JWT
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 		<dependency>

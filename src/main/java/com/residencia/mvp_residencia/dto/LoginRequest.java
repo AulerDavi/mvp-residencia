@@ -1,5 +1,8 @@
 package com.residencia.mvp_residencia.dto;
 
-public record LoginRequest(String email, String senha) {
+import jakarta.validation.constraints.NotBlank;
+
+public record LoginRequest(
+        @NotBlank(message = "O e-mail é obrigatório") String email,
+        @NotBlank(message = "A senha é obrigatória") String senha) {
 }
-//(o que o usuário envia no POST /login'

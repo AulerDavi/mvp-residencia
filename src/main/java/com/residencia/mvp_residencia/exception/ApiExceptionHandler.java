@@ -19,6 +19,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
@@ -95,6 +96,12 @@ public class ApiExceptionHandler {
     public ResponseEntity<ErroResposta> integridade(DataIntegrityViolationException ex, HttpServletRequest req) {
         log.warn("Violação de integridade em {}: {}", req.getRequestURI(), ex.getMostSpecificCause().getMessage());
         return montar(HttpStatus.CONFLICT, "A operação viola uma regra de integridade dos dados.", req, null);
+    }
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ErroResposta> statusException(ResponseStatusException ex, HttpServletRequest req) {
+        String mensagem = (ex.getReason() != null) ? ex.getReason() : "Não foi possível processar a requisição.";
+        return montar(ex.getStatusCode(), mensagem, req, null);
     }
 
     @ExceptionHandler(Exception.class)

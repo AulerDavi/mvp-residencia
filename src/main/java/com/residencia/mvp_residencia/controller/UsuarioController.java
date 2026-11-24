@@ -2,6 +2,11 @@ package com.residencia.mvp_residencia.controller;
 
 import com.residencia.mvp_residencia.model.Usuario;
 import com.residencia.mvp_residencia.service.UsuarioService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +22,18 @@ public class UsuarioController {
 
     private final UsuarioService service;
 
-    public record CadastroRequest(String nome, String email, String senha) {
+    public record CadastroRequest(
+            @NotBlank(message = "O nome é obrigatório") String nome,
+            @NotBlank(message = "O e-mail é obrigatório")
+            @Email(message = "E-mail inválido") String email,
+            @NotBlank(message = "A senha é obrigatória")
+            @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres") String senha) {
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String cadastrar(@RequestBody CadastroRequest request) {
+    public Map<String, Object> cadastrar(@Valid @RequestBody CadastroRequest request) {
         Usuario usuario = service.cadastrar(request.nome(), request.email(), request.senha());
-        return "Usuário " + usuario.getNome() + " cadastrado com id " + usuario.getId();
+        return Map.of("id", usuario.getId(), "nome", usuario.getNome());
     }
 }

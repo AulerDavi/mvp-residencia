@@ -36,6 +36,9 @@ public class SegurancaConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            // Ativa o CORS usando o bean CorsConfigurationSource (CorsConfig) para o frontend poder chamar a API
+            .cors(Customizer.withDefaults())
+
             // Desativa a proteção CSRF (padrão para APIs REST que usam token no cabeçalho em vez de cookies)
             .csrf(csrf -> csrf.disable())
 
